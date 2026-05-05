@@ -22,6 +22,13 @@
     })(window,document,'script','dataLayer','{{ config('app.gtm_id') }}');</script>
     <!-- End Google Tag Manager -->
 
+    <script>
+        window.__env = {
+            apiUrl: "{{ config('app.api_url') }}",
+            gtmId: "{{ config('app.gtm_id') }}"
+        };
+    </script>
+
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body>
@@ -30,9 +37,6 @@
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
 
-    <div id="app"
-        data-apiurl="{{ config('app.api_url') }}"
-        data-gtmid="{{ config('app.gtm_id') }}"
-    ></div>
+    <div id="app"></div>
 </body>
 </html>
