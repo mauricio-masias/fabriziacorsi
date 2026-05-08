@@ -142,4 +142,16 @@
     .privacy-btn:hover {
         color: #b44fff;
     }
+
+    @media (max-width: 640px) {
+        .footer-inner {
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 1.25rem;
+        }
+        .footer-links {
+            justify-content: center;
+        }
+    }
 </style>

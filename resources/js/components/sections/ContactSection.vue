@@ -97,7 +97,7 @@
                         >
                             <polyline points="20 6 9 17 4 12" />
                         </svg>
-                        Beat-reactive Lights
+                        Beat-reactive Laser/Lights
                     </li>
                     <li>
                         <svg
@@ -112,6 +112,34 @@
                             <polyline points="20 6 9 17 4 12" />
                         </svg>
                         Live Electronic Drums
+                    </li>
+                    <li>
+                        <svg
+                            width="16"
+                            height="16"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="#f72585"
+                            stroke-width="2"
+                            aria-hidden="true"
+                        >
+                            <polyline points="20 6 9 17 4 12" />
+                        </svg>
+                        Dj Booth
+                    </li>
+                    <li>
+                        <svg
+                            width="16"
+                            height="16"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="#f72585"
+                            stroke-width="2"
+                            aria-hidden="true"
+                        >
+                            <polyline points="20 6 9 17 4 12" />
+                        </svg>
+                        Pioneer DJ XDJ-RX3 Controller
                     </li>
                 </ul>
 
@@ -233,6 +261,10 @@
         }
         .contact-vinyl {
             display: none;
+        }
+        .contact-content {
+            align-items: center;
+            text-align: center;
         }
     }
 </style>

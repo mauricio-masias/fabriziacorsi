@@ -62,6 +62,9 @@
 
 <template>
     <section id="about" ref="sectionRef" class="about-section reveal" aria-labelledby="about-title">
+        <!-- Background image -->
+        <div class="about-bg" aria-hidden="true"></div>
+
         <div class="about-inner">
             <!-- Header -->
             <div class="about-header">
@@ -153,65 +156,59 @@
                     <div class="spec-icon" aria-hidden="true">
                         <!-- Vinyl icon -->
                         <template v-if="item.icon === 'vinyl'">
-                            <svg
-                                width="38"
-                                height="38"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="#f72585"
-                                stroke-width="1.5"
-                            >
-                                <circle cx="12" cy="12" r="10" />
-                                <circle cx="12" cy="12" r="3" />
-                                <circle cx="12" cy="12" r="1" fill="#b44fff" stroke="none" />
+                            <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke-width="1.5">
+                                <defs>
+                                    <linearGradient id="sg-vinyl" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
+                                        <stop offset="0%" stop-color="#b44fff" />
+                                        <stop offset="100%" stop-color="#f72585" />
+                                    </linearGradient>
+                                </defs>
+                                <circle cx="12" cy="12" r="10" stroke="url(#sg-vinyl)" />
+                                <circle cx="12" cy="12" r="3" stroke="url(#sg-vinyl)" />
+                                <circle cx="12" cy="12" r="1" fill="url(#sg-vinyl)" stroke="none" />
                             </svg>
                         </template>
                         <!-- Drums icon -->
                         <template v-else-if="item.icon === 'drums'">
-                            <svg
-                                width="38"
-                                height="38"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="#f72585"
-                                stroke-width="1.5"
-                            >
-                                <ellipse cx="12" cy="9" rx="9" ry="4" />
-                                <path d="M3 9v6c0 2.2 4 4 9 4s9-1.8 9-4V9" />
-                                <line x1="7" y1="4" x2="5" y2="2" />
-                                <line x1="17" y1="4" x2="19" y2="2" />
+                            <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke-width="1.5">
+                                <defs>
+                                    <linearGradient id="sg-drums" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
+                                        <stop offset="0%" stop-color="#b44fff" />
+                                        <stop offset="100%" stop-color="#f72585" />
+                                    </linearGradient>
+                                </defs>
+                                <ellipse cx="12" cy="9" rx="9" ry="4" stroke="url(#sg-drums)" />
+                                <path d="M3 9v6c0 2.2 4 4 9 4s9-1.8 9-4V9" stroke="url(#sg-drums)" />
+                                <line x1="7" y1="4" x2="5" y2="2" stroke="url(#sg-drums)" />
+                                <line x1="17" y1="4" x2="19" y2="2" stroke="url(#sg-drums)" />
                             </svg>
                         </template>
                         <!-- Globe icon -->
                         <template v-else-if="item.icon === 'globe'">
-                            <svg
-                                width="38"
-                                height="38"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="#f72585"
-                                stroke-width="1.5"
-                            >
-                                <circle cx="12" cy="12" r="10" />
-                                <line x1="2" y1="12" x2="22" y2="12" />
-                                <path
-                                    d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
-                                />
+                            <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke-width="1.5">
+                                <defs>
+                                    <linearGradient id="sg-globe" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
+                                        <stop offset="0%" stop-color="#b44fff" />
+                                        <stop offset="100%" stop-color="#f72585" />
+                                    </linearGradient>
+                                </defs>
+                                <circle cx="12" cy="12" r="10" stroke="url(#sg-globe)" />
+                                <line x1="2" y1="12" x2="22" y2="12" stroke="url(#sg-globe)" />
+                                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" stroke="url(#sg-globe)" />
                             </svg>
                         </template>
                         <!-- Studio icon -->
                         <template v-else>
-                            <svg
-                                width="38"
-                                height="38"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="#f72585"
-                                stroke-width="1.5"
-                            >
-                                <path d="M9 18V5l12-2v13" />
-                                <circle cx="6" cy="18" r="3" />
-                                <circle cx="18" cy="16" r="3" />
+                            <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke-width="1.5">
+                                <defs>
+                                    <linearGradient id="sg-studio" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
+                                        <stop offset="0%" stop-color="#b44fff" />
+                                        <stop offset="100%" stop-color="#f72585" />
+                                    </linearGradient>
+                                </defs>
+                                <path d="M9 18V5l12-2v13" stroke="url(#sg-studio)" />
+                                <circle cx="6" cy="18" r="3" stroke="url(#sg-studio)" />
+                                <circle cx="18" cy="16" r="3" stroke="url(#sg-studio)" />
                             </svg>
                         </template>
                     </div>
@@ -225,11 +222,15 @@
 
 <style scoped>
     .about-section {
+        position: relative;
         background: #080808;
         padding: 6rem 1.5rem;
+        overflow: hidden;
     }
 
     .about-inner {
+        position: relative;
+        z-index: 1;
         max-width: 1100px;
         margin: 0 auto;
         display: flex;
@@ -274,7 +275,7 @@
         display: flex;
         flex-direction: column;
         gap: 2px;
-        font-size: clamp(3rem, 3vw, 5rem);
+        font-size: clamp(2rem, 3vw, 5rem);
         font-family: 'Bebas Neue', sans-serif;
         letter-spacing: 0.06em;
         background: linear-gradient(135deg, #b44fff, #f72585);
@@ -307,7 +308,10 @@
         color: #d080ff;
     }
     .about-prose :deep(strong) {
-        color: #f8fafc;
+        background: linear-gradient(135deg, #b44fff, #f72585);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
     }
     .about-prose :deep(.about_text) {
         margin-top: 1.5rem;
@@ -339,6 +343,12 @@
     .bio-quote blockquote :deep(p) {
         margin: 0 0 0.5rem;
     }
+    .bio-quote blockquote :deep(strong) {
+        background: linear-gradient(135deg, #b44fff, #f72585);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
 
     .years-badge {
         display: flex;
@@ -350,6 +360,7 @@
         border: 1px solid rgba(180, 79, 255, 0.2);
         border-radius: 12px;
         text-align: center;
+        margin: 60px 0;
     }
     .years-number {
         font-family: 'Bebas Neue', sans-serif;
@@ -374,7 +385,7 @@
         gap: 1rem;
     }
     .specialty-card {
-        background: #101010;
+        background: rgba(0, 0, 0, 0.5);
         border-radius: 10px;
         padding: 1.5rem 1.25rem;
         display: flex;
@@ -383,7 +394,7 @@
         transition: background 0.25s ease;
     }
     .specialty-card:hover {
-        background: #1a1a1a;
+        background: rgba(0, 0, 0, 0.7);
     }
     .spec-icon {
         width: 38px;
@@ -391,16 +402,61 @@
     }
     .spec-label {
         font-family: 'Righteous', sans-serif;
-        font-size: 0.9rem;
+        font-size: 1.2rem;
         color: #f8fafc;
         margin: 0;
     }
     .spec-desc {
         font-family: 'Poppins', sans-serif;
-        font-size: 0.75rem;
+        font-size: 0.9rem;
         color: #CCC;
         margin: 0;
         line-height: 1.5;
+    }
+
+     /* ─── Background image ───────────────────────── */
+    .about-bg {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: min(100%, 1200px);
+        z-index: 0;
+        background: url('/assets/black-and-white-mansion.jpg') 60% 70% / cover no-repeat;
+        transform: translateX(-50%) scaleX(-1);
+        filter: grayscale(1) contrast(1.4) brightness(0.45);
+    }
+
+    /* Edge fade from #080808 on all 4 sides */
+    .about-bg::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background:
+            linear-gradient(to bottom, #080808 0%, transparent 30%),
+            linear-gradient(to top,    #080808 0%, transparent 15%),
+            linear-gradient(to right,  #080808 0%, transparent 15%),
+            linear-gradient(to left,   #080808 0%, transparent 25%);
+        pointer-events: none;
+        z-index: 1;
+    }
+
+    /* Scan lines overlay on background */
+    .about-bg::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background-image: repeating-linear-gradient(
+            0deg,
+            transparent 0px,
+            transparent 3px,
+            rgba(0, 0, 0, 0.42) 3px,
+            rgba(0, 0, 0, 0.42) 5px
+        );
+        background-size: 100% 5px;
+        pointer-events: none;
+        animation: scanline-scroll 6s linear infinite;
     }
 
     @media (max-width: 900px) {
@@ -415,6 +471,21 @@
         }
         .specialty-grid {
             grid-template-columns: repeat(2, 1fr);
+        }
+        .about-left-col {
+            align-items: center;
+            text-align: center;
+        }
+        .ig-follow {
+            align-self: center;
+        }
+        .ig-text {
+            text-align: left;
+        }
+        .bio-quote blockquote {
+            border-left: none;
+            padding-left: 0;
+            text-align: center;
         }
     }
 </style>

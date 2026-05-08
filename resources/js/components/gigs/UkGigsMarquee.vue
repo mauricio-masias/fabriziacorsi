@@ -35,7 +35,7 @@
         </ul>
 
         <div class="marquee-count">
-            <span class="count-number">{{ venues.length }}</span>
+            <span class="count-number">100+</span>
             <span class="count-label">UK Venues</span>
         </div>
     </div>

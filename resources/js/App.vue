@@ -71,8 +71,8 @@
 
         <main>
             <HeroSection :music-styles="musicStyles" />
-            <AboutSection :about="aboutData" :bio="bioData" />
             <GigsSection :uk-gigs="ukGigs" :intl-gigs="intlGigs" />
+            <AboutSection :about="aboutData" :bio="bioData" />
             <MixesSection />
             <ReleasesSection />
             <ContactSection :contact="contactData" />

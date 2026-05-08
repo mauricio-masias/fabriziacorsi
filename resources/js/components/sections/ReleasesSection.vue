@@ -172,6 +172,7 @@
     @media (max-width: 500px) {
         .rel-grid {
             grid-template-columns: 1fr;
+            padding: 0 2.5%;
         }
     }
 </style>

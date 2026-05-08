@@ -107,6 +107,16 @@
         filter: grayscale(1) contrast(1.4) brightness(0.45);
     }
 
+    /* Left-side gradient fade */
+    .hero-bg::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to right, #000000 0%, transparent 50%);
+        pointer-events: none;
+        z-index: 1;
+    }
+
     /* Scan lines overlay on background */
     .hero-bg::after {
         content: '';
@@ -259,7 +269,7 @@
         font-size: clamp(0.7rem, 2vw, 0.9rem);
         letter-spacing: 0.38em;
         text-transform: uppercase;
-        color: #f72585;
+        color: #CCC;
         margin: 0;
         animation: fade-in-up 0.9s 0.3s ease both;
     }

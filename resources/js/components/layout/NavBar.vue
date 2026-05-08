@@ -122,7 +122,6 @@
     .navbar.scrolled {
         background: rgba(8, 8, 8, 0.88);
         backdrop-filter: blur(12px);
-        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
     }
 
     .nav-inner {

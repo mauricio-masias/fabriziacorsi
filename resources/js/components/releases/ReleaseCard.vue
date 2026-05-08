@@ -13,7 +13,7 @@
 </script>
 
 <template>
-    <article class="rel-card grad-border" :aria-label="`${track.title} release`">
+    <article class="rel-card" :aria-label="`${track.title} release`">
         <div class="rel-img-wrap">
             <img
                 :src="track.img"
@@ -68,10 +68,7 @@
         overflow: hidden;
         display: flex;
         flex-direction: column;
-        border: 1px solid rgba(255, 255, 255, 0.05);
-        transition:
-            transform 0.25s ease,
-            box-shadow 0.25s ease;
+        border: 1px solid rgba(255, 255, 255, 0.1);
     }
     .rel-card:hover {
         transform: translateY(-4px);
@@ -183,15 +180,24 @@
         font-size: 0.62rem;
         letter-spacing: 0.05em;
         text-decoration: none;
-        border: 1px solid rgba(var(--accent), 0.3);
-        color: var(--accent);
-        background: rgba(0, 0, 0, 0.2);
+        border: 1px solid rgba(180, 79, 255, 0.3);
+        background: linear-gradient(135deg, #b44fff, #f72585);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
         transition:
             background 0.2s,
             transform 0.15s;
     }
     .stream-link:hover {
-        background: color-mix(in srgb, var(--accent) 15%, transparent);
+        border-color: rgba(247, 37, 133, 0.5);
         transform: translateY(-1px);
+    }
+
+    @media (hover: none) {
+        .stream-link {
+            border-color: rgba(247, 37, 133, 0.5);
+            transform: translateY(-1px);
+        }
     }
 </style>
