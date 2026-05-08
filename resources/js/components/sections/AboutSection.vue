@@ -23,7 +23,7 @@
         {
             icon: 'vinyl',
             label: 'Vinyls & USB',
-            desc: 'Tradition meets modern — spinning wax and digital sets with equal passion.',
+            desc: 'Tradition meets modern, spinning wax and digital sets with equal passion.',
         },
         {
             icon: 'drums',
@@ -64,6 +64,7 @@
     <section id="about" ref="sectionRef" class="about-section reveal" aria-labelledby="about-title">
         <!-- Background image -->
         <div class="about-bg" aria-hidden="true"></div>
+        <div class="about-fade" aria-hidden="true"></div>
 
         <div class="about-inner">
             <!-- Header -->
@@ -230,7 +231,7 @@
 
     .about-inner {
         position: relative;
-        z-index: 1;
+        z-index: 2;
         max-width: 1100px;
         margin: 0 auto;
         display: flex;
@@ -417,31 +418,25 @@
      /* ─── Background image ───────────────────────── */
     .about-bg {
         position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 50%;
-        transform: translateX(-50%);
-        width: min(100%, 1200px);
+        inset: 0;
         z-index: 0;
         background: url('/assets/black-and-white-mansion.jpg') 60% 70% / cover no-repeat;
-        transform: translateX(-50%) scaleX(-1);
+        transform: scaleX(-1);
         filter: grayscale(1) contrast(1.4) brightness(0.45);
     }
 
-    /* Edge fade from #080808 on all 4 sides */
-    .about-bg::before {
-        content: '';
+    /* Edge fade — sibling div outside .about-bg so filter:grayscale doesn't eat it */
+    .about-fade {
         position: absolute;
         inset: 0;
-        background:
-            linear-gradient(to bottom, #080808 0%, transparent 30%),
-            linear-gradient(to top,    #080808 0%, transparent 15%),
-            linear-gradient(to right,  #080808 0%, transparent 15%),
-            linear-gradient(to left,   #080808 0%, transparent 25%);
-        pointer-events: none;
         z-index: 1;
+        pointer-events: none;
+        background:
+            linear-gradient(to bottom, #080808 0%, rgba(8,8,8,0) 30%),
+            linear-gradient(to top,    #080808 0%, rgba(8,8,8,0) 15%),
+            linear-gradient(to right,  #080808 0%, rgba(8,8,8,0) 15%),
+            linear-gradient(to left,   #080808 0%, rgba(8,8,8,0) 15%);
     }
-
     /* Scan lines overlay on background */
     .about-bg::after {
         content: '';
