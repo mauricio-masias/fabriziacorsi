@@ -21,12 +21,20 @@
             <!-- Decorative vinyl -->
             <div class="contact-vinyl" aria-hidden="true">
                 <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" class="vinyl-bg">
+                    <defs>
+                        <clipPath id="center-logo-clip">
+                            <circle cx="100" cy="100" r="33" />
+                        </clipPath>
+                        <filter id="hole-glow" x="-600%" y="-600%" width="1300%" height="1300%">
+                            <feGaussianBlur stdDeviation="5" />
+                        </filter>
+                    </defs>
                     <circle
                         cx="100"
                         cy="100"
                         r="96"
-                        fill="#0a0a0a"
-                        stroke="#1e1e1e"
+                        fill="#0e0e0e"
+                        stroke="#2e2e2e"
                         stroke-width="1"
                     />
                     <circle
@@ -34,7 +42,7 @@
                         cy="100"
                         r="80"
                         fill="none"
-                        stroke="#161616"
+                        stroke="#252525"
                         stroke-width="1"
                     />
                     <circle
@@ -42,7 +50,7 @@
                         cy="100"
                         r="64"
                         fill="none"
-                        stroke="#161616"
+                        stroke="#252525"
                         stroke-width="1"
                     />
                     <circle
@@ -50,11 +58,20 @@
                         cy="100"
                         r="48"
                         fill="none"
-                        stroke="#161616"
+                        stroke="#252525"
                         stroke-width="1"
                     />
                     <circle cx="100" cy="100" r="34" fill="#16003a" />
-                    <circle cx="100" cy="100" r="5" fill="#080808" />
+                    <image
+                        href="/assets/dj-fabrizia-n-logo.png"
+                        x="78"
+                        y="73"
+                        width="44"
+                        height="44"
+                        clip-path="url(#center-logo-clip)"
+                        preserveAspectRatio="xMidYMid meet"
+                    />
+                    <circle cx="100" cy="100" r="5" fill="#16003a" />
                 </svg>
             </div>
 
@@ -174,13 +191,13 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        opacity: 0.3;
+        opacity: 0.65;
     }
     .vinyl-bg {
         width: 100%;
         max-width: 360px;
         animation: spin-vinyl 30s linear infinite;
-        filter: drop-shadow(0 0 30px rgba(180, 79, 255, 0.15));
+        filter: drop-shadow(0 0 40px rgba(180, 79, 255, 0.4));
     }
 
     .contact-content {
