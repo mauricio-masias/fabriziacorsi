@@ -45,11 +45,11 @@ public_html/
 ## Environment Variables
 
 ```env
-VITE_DJ_API_URL=https://your-api-host/api/v1   # External DJ data API
+DJ_API_URL=https://your-api-host/api/v2        # External DJ data API (read via config/app.php)
 VITE_GTM_ID=GTM-XXXXXXX                         # Google Tag Manager
 ```
 
-The app fetches all content (music styles, about text, gigs, mixes, releases) from an external API at `/api/v1`. Endpoints used: `/homepage`, `/bio`, `/mixes`, `/releases`.
+The app fetches all content (music styles, about text, gigs, mixes, releases) from an external API at `/api/v2`. Endpoints used: `/pages/home` (which also embeds the first page of mixes and releases), `/pages/bio`, `/pages/privacy-policy`, and `/collections/mixes` / `/collections/releases` (`?page=N`, for "load more").
 
 ## Local Development
 

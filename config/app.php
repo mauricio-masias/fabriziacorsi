@@ -123,7 +123,7 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
-    'api_url' => env('DJ_API_URL', 'http://localhost:4040/api/v1'),
+    'api_url' => env('DJ_API_URL', 'http://localhost:4040/api/v2'),
 
     'gtm_id' => env('GTM_ID', 'GTM-XXXXXXX'),
 

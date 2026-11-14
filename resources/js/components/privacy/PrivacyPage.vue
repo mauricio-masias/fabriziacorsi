@@ -1,6 +1,7 @@
 <script setup>
     import { ref, onMounted, onUnmounted } from 'vue'
     import { useApi } from '@/composables/useApi'
+    import { mapPrivacyPage } from '@/api/v2Adapters'
 
     const emit = defineEmits(['close'])
 
@@ -9,18 +10,18 @@
     const loading = ref(true)
 
     onMounted(async () => {
+        // Close on Escape — registered before the fetch so it works while loading
+        window.addEventListener('keydown', onKeyDown)
+        document.body.style.overflow = 'hidden'
+
         try {
-            const data = await fetchEndpoint('/privacy-policy')
-            content.value = data.content ?? ''
+            const body = await fetchEndpoint('/pages/privacy-policy')
+            content.value = mapPrivacyPage(body?.data)
         } catch (e) {
             content.value = '<p>Privacy policy could not be loaded.</p>'
         } finally {
             loading.value = false
         }
-
-        // Close on Escape
-        window.addEventListener('keydown', onKeyDown)
-        document.body.style.overflow = 'hidden'
     })
 
     onUnmounted(() => {

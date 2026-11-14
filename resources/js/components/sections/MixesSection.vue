@@ -1,42 +1,21 @@
 <script setup>
     import { ref } from 'vue'
-    import { useApi } from '@/composables/useApi'
-    import { useLazyLoad } from '@/composables/useReveal'
+    import { useCollectionFeed } from '@/composables/useCollectionFeed'
+    import { mapMix } from '@/api/v2Adapters'
     import MixCard from '@/components/mixes/MixCard.vue'
 
-    const { fetchEndpoint } = useApi()
+    const props = defineProps({
+        initialPage: { type: Object, default: null },
+    })
 
     const sectionRef = ref(null)
-    const tracks = ref([])
-    const loading = ref(false)
-    const currentPage = ref(1)
-    const totalPages = ref(1)
-    const hasMore = ref(false)
-
-    const loadMixes = async (page = 1) => {
-        loading.value = true
-        try {
-            const data = await fetchEndpoint('/mixes', page > 1 ? { page } : {})
-            const content = data[0]?.content ?? {}
-            if (page === 1) {
-                tracks.value = content.tracks ?? []
-            } else {
-                tracks.value.push(...(content.tracks ?? []))
-            }
-            const mb = content.more_button ?? {}
-            currentPage.value = mb.current_page ?? page
-            totalPages.value = mb.total_pages ?? 1
-            hasMore.value = mb.active ?? false
-        } catch (e) {
-            console.error('Mixes load failed', e)
-        } finally {
-            loading.value = false
-        }
-    }
-
-    useLazyLoad(sectionRef, () => loadMixes(1))
-
-    const loadMore = () => loadMixes(currentPage.value + 1)
+    const { tracks, loading, currentPage, totalPages, hasMore, loadMore } = useCollectionFeed({
+        sectionRef,
+        path: '/collections/mixes',
+        mapItem: mapMix,
+        initialPage: props.initialPage,
+        label: 'Mixes',
+    })
 </script>
 
 <template>
@@ -146,8 +125,7 @@
         letter-spacing: 0.1em;
         text-transform: uppercase;
         cursor: pointer;
-        transition:
-            transform 0.15s;
+        transition: transform 0.15s;
     }
     .load-more-btn::before {
         content: '';
@@ -156,7 +134,9 @@
         border-radius: inherit;
         padding: 1px;
         background: linear-gradient(135deg, #b44fff, #f72585);
-        -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        -webkit-mask:
+            linear-gradient(#fff 0 0) content-box,
+            linear-gradient(#fff 0 0);
         -webkit-mask-composite: xor;
         mask-composite: exclude;
         pointer-events: none;
@@ -184,7 +164,7 @@
     @media (max-width: 500px) {
         .mix-grid {
             grid-template-columns: 1fr;
-            padding:0 2.5%;
+            padding: 0 2.5%;
         }
     }
 </style>
