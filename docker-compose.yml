@@ -16,7 +16,7 @@ services:
         environment:
             docker: "true"
         ports:
-            - 6060:8080
+            - 7040:8080
         volumes:
             - .:/var/www
             - logs:/var/www/logs

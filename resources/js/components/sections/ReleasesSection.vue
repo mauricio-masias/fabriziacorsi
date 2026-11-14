@@ -1,42 +1,21 @@
 <script setup>
     import { ref } from 'vue'
-    import { useApi } from '@/composables/useApi'
-    import { useLazyLoad } from '@/composables/useReveal'
+    import { useCollectionFeed } from '@/composables/useCollectionFeed'
+    import { mapRelease } from '@/api/v2Adapters'
     import ReleaseCard from '@/components/releases/ReleaseCard.vue'
 
-    const { fetchEndpoint } = useApi()
+    const props = defineProps({
+        initialPage: { type: Object, default: null },
+    })
 
     const sectionRef = ref(null)
-    const tracks = ref([])
-    const loading = ref(false)
-    const currentPage = ref(1)
-    const totalPages = ref(1)
-    const hasMore = ref(false)
-
-    const loadReleases = async (page = 1) => {
-        loading.value = true
-        try {
-            const data = await fetchEndpoint('/releases', page > 1 ? { page } : {})
-            const content = data[0]?.content ?? {}
-            if (page === 1) {
-                tracks.value = content.tracks ?? []
-            } else {
-                tracks.value.push(...(content.tracks ?? []))
-            }
-            const mb = content.more_button ?? {}
-            currentPage.value = mb.current_page ?? page
-            totalPages.value = mb.total_pages ?? 1
-            hasMore.value = mb.active ?? false
-        } catch (e) {
-            console.error('Releases load failed', e)
-        } finally {
-            loading.value = false
-        }
-    }
-
-    useLazyLoad(sectionRef, () => loadReleases(1))
-
-    const loadMore = () => loadReleases(currentPage.value + 1)
+    const { tracks, loading, currentPage, totalPages, hasMore, loadMore } = useCollectionFeed({
+        sectionRef,
+        path: '/collections/releases',
+        mapItem: mapRelease,
+        initialPage: props.initialPage,
+        label: 'Releases',
+    })
 </script>
 
 <template>

@@ -11,7 +11,7 @@ test.describe('Fabrizia Corsi Homepage', () => {
 
         // Preloader should disappear and hero should be visible
         await expect(page.locator('#hero')).toBeVisible({ timeout: 15000 })
-        await expect(page.locator('#hero h1')).toContainText('FABRIZIA CORSI')
+        await expect(page.locator('#hero h1')).toHaveText('Fabrizia Corsi')
     })
 
     test('navigation bar is visible after load', async ({ page }) => {
@@ -47,7 +47,7 @@ test.describe('Fabrizia Corsi Homepage', () => {
         await page.goto('/')
         await expect(page.locator('[data-testid="cookie-banner"]')).toBeVisible({ timeout: 5000 })
         await page.click('.privacy-link')
-        await expect(page.locator('[role="dialog"]')).toBeVisible()
+        await expect(page.getByRole('dialog', { name: 'Privacy Policy' })).toBeVisible()
         await expect(page.locator('#privacy-title')).toContainText('Privacy Policy')
     })
 
@@ -55,9 +55,10 @@ test.describe('Fabrizia Corsi Homepage', () => {
         await page.goto('/')
         await expect(page.locator('[data-testid="cookie-banner"]')).toBeVisible({ timeout: 5000 })
         await page.click('.privacy-link')
-        await expect(page.locator('[role="dialog"]')).toBeVisible()
+        const privacyDialog = page.getByRole('dialog', { name: 'Privacy Policy' })
+        await expect(privacyDialog).toBeVisible()
         await page.keyboard.press('Escape')
-        await expect(page.locator('[role="dialog"]')).not.toBeVisible({ timeout: 2000 })
+        await expect(privacyDialog).not.toBeVisible({ timeout: 2000 })
     })
 
     test('all main sections are present in the DOM', async ({ page }) => {
@@ -75,7 +76,14 @@ test.describe('Fabrizia Corsi Homepage', () => {
         await expect(page.locator('#hero')).toBeVisible({ timeout: 15000 })
         // Scroll triggers navbar visibility
         await page.evaluate(() => window.scrollBy(0, 100))
-        await page.click('a[href="#about"]')
+        // On narrow viewports the links live behind the hamburger menu
+        const hamburger = page.locator('.hamburger')
+        if (await hamburger.isVisible()) {
+            await hamburger.click()
+            await page.click('.mobile-link[href="#about"]')
+        } else {
+            await page.click('.nav-link[href="#about"]')
+        }
         await page.waitForTimeout(800)
         const aboutTop = await page.locator('#about').boundingBox()
         expect(aboutTop).not.toBeNull()

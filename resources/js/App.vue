@@ -1,6 +1,7 @@
 <script setup>
     import { ref, onMounted, nextTick, provide } from 'vue'
     import { useApi } from '@/composables/useApi'
+    import { mapHomePage, mapBioPage } from '@/api/v2Adapters'
     import PreLoader from '@/components/layout/PreLoader.vue'
     import NavBar from '@/components/layout/NavBar.vue'
     import CookieBanner from '@/components/layout/CookieBanner.vue'
@@ -22,6 +23,8 @@
     const musicStyles = ref([])
     const aboutData = ref(null)
     const contactData = ref(null)
+    const mixesFirstPage = ref(null)
+    const releasesFirstPage = ref(null)
 
     // Phase 2 — below fold
     const bioData = ref(null)
@@ -32,10 +35,12 @@
 
     onMounted(async () => {
         try {
-            const hp = await fetchEndpoint('/homepage')
-            musicStyles.value = hp[0]?.music_styles ?? []
-            aboutData.value = hp[1] ?? null
-            contactData.value = hp[2] ?? null
+            const home = mapHomePage((await fetchEndpoint('/pages/home'))?.data)
+            musicStyles.value = home.musicStyles
+            aboutData.value = home.about
+            contactData.value = home.contact
+            mixesFirstPage.value = home.mixesFirstPage
+            releasesFirstPage.value = home.releasesFirstPage
         } catch (e) {
             console.error('Homepage load failed', e)
         } finally {
@@ -44,16 +49,10 @@
 
         nextTick(async () => {
             try {
-                const bio = await fetchEndpoint('/bio')
-                bioData.value = bio[0] ?? null
-                const gigsRaw = bio[1] ?? null
-                if (gigsRaw) {
-                    ukGigs.value = [
-                        ...(gigsRaw.content_left ?? []),
-                        ...(gigsRaw.content_right ?? []),
-                    ]
-                }
-                intlGigs.value = bio[2]?.content ?? []
+                const bio = mapBioPage((await fetchEndpoint('/pages/bio'))?.data)
+                bioData.value = bio.bio
+                ukGigs.value = bio.ukGigs
+                intlGigs.value = bio.intlGigs
             } catch (e) {
                 console.error('Bio load failed', e)
             }
@@ -73,8 +72,8 @@
             <HeroSection :music-styles="musicStyles" />
             <GigsSection :uk-gigs="ukGigs" :intl-gigs="intlGigs" />
             <AboutSection :about="aboutData" :bio="bioData" />
-            <MixesSection />
-            <ReleasesSection />
+            <MixesSection :initial-page="mixesFirstPage" />
+            <ReleasesSection :initial-page="releasesFirstPage" />
             <ContactSection :contact="contactData" />
         </main>
 
